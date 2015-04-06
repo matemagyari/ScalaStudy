@@ -1,3 +1,5 @@
+package org.home.garbage
+
 import scala.util.Random
 
 /**

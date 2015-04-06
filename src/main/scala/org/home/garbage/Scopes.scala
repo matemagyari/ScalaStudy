@@ -5,23 +5,17 @@ object Scopes extends App {
 
 
 }
-package inf {
+package org.home.garbage
 
-import inf.app.A
-
-package app {
+class C {
+    //can't see it here
+    //val c = new A().x
+  }
 
     class A {
       private[app] val x = 5
     }
 
-    class B {
+  class B {
       val b = new A().x
     }
-  }
-
-  class C {
-    //can't see it here
-    //val c = new A().x
-  }
-}

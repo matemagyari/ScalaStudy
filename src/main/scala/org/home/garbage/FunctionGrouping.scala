@@ -1,3 +1,5 @@
+package org.home.garbage
+
 /**
  * Created by mate.magyari on 09/11/2014.
  */

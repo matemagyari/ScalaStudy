@@ -1,3 +1,5 @@
+package org.home.garbage
+
 import java.io.File
 
 import scala.io.Source
