@@ -1,7 +1,7 @@
-package org.home.filemerger.infrastructure
+package org.home.bigdataaggregator.infrastructure
 
-import org.home.filemerger.{AggregatorAppService, Money, Input}
-import org.home.filemerger.Monetary._
+import org.home.bigdataaggregator.{AggregatorAppService, Money, Input}
+import org.home.bigdataaggregator.Monetary._
 
 class Orchestrator(aggregatorAppService: AggregatorAppService,
                    toOutput1: Map[Partner, Money] => Unit,

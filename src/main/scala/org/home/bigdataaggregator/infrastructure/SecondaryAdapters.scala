@@ -1,7 +1,7 @@
-package org.home.filemerger.infrastructure
+package org.home.bigdataaggregator.infrastructure
 
-import org.home.filemerger.Monetary.Partner
-import org.home.filemerger.Money
+import org.home.bigdataaggregator.Monetary.Partner
+import org.home.bigdataaggregator.Money
 
 object SecondaryAdapters {
 

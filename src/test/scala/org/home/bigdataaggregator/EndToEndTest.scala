@@ -1,8 +1,8 @@
-package org.home.filemerger
+package org.home.bigdataaggregator
 
-import org.home.filemerger.Monetary.Partner
-import org.home.filemerger.TestFixture._
-import org.home.filemerger.infrastructure.{Orchestrator, ExchangeRatesFileReader, TransactionsFileReader}
+import org.home.bigdataaggregator.Monetary.Partner
+import org.home.bigdataaggregator.TestFixture._
+import org.home.bigdataaggregator.infrastructure.{Orchestrator, ExchangeRatesFileReader, TransactionsFileReader}
 
 //import org.junit.Assert._
 //import org.junit.Test

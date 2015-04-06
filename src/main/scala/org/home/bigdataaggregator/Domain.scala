@@ -1,6 +1,6 @@
-package org.home.filemerger
+package org.home.bigdataaggregator
 
-import org.home.filemerger.Monetary.{Partner, ExchangeRates, Currency}
+import org.home.bigdataaggregator.Monetary.{Partner, ExchangeRates, Currency}
 
 object Monetary {
 

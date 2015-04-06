@@ -1,7 +1,7 @@
-package org.home.filemerger.infrastructure
+package org.home.bigdataaggregator.infrastructure
 
-import org.home.filemerger.Monetary.{Currency, ExchangeRates}
-import org.home.filemerger.{Transaction, Money}
+import org.home.bigdataaggregator.Monetary.{Currency, ExchangeRates}
+import org.home.bigdataaggregator.{Transaction, Money}
 
 import scala.io.Source
 

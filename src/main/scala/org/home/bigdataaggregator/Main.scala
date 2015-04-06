@@ -1,8 +1,8 @@
-package org.home.filemerger
+package org.home.bigdataaggregator
 
-import org.home.filemerger.Monetary.Partner
-import org.home.filemerger.infrastructure.SecondaryAdapters.OutputPrinter
-import org.home.filemerger.infrastructure.{ExchangeRatesFileReader, Orchestrator, TransactionsFileReader}
+import org.home.bigdataaggregator.Monetary.Partner
+import org.home.bigdataaggregator.infrastructure.SecondaryAdapters.OutputPrinter
+import org.home.bigdataaggregator.infrastructure.{ExchangeRatesFileReader, Orchestrator, TransactionsFileReader}
 
 object Main extends App {
 

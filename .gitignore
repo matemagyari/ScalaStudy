@@ -1,7 +1,5 @@
 .idea/
-build.sbt
 *.csv
 pom.xml
 project/
 target/
-transactions.csv

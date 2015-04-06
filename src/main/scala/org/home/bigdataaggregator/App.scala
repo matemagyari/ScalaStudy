@@ -1,6 +1,6 @@
-package org.home.filemerger
+package org.home.bigdataaggregator
 
-import org.home.filemerger.Monetary._
+import org.home.bigdataaggregator.Monetary._
 
 case class Input(transactionsFile: String, exchangeRatesFile: String, targetCurrency: Currency, partner: Partner)
 

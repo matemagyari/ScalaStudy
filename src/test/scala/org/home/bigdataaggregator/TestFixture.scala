@@ -1,4 +1,4 @@
-package org.home.filemerger
+package org.home.bigdataaggregator
 
 import java.io.{File, FileWriter}
 
