@@ -2,19 +2,26 @@ package org.home.bigdataaggregator
 
 import org.home.bigdataaggregator.Monetary._
 
-case class Input(transactionsFile: String, exchangeRatesFile: String, targetCurrency: Currency, partner: Partner)
+case class Input(createTransactionsIterator: Unit => Iterator[Transaction],
+                 exchangeRates: ExchangeRates,
+                 targetCurrency: Currency,
+                 partner: Partner)
 
 
-class AggregatorAppService(readUpTransactions: String => Iterator[Transaction],
-                           readUpExchangeRates: String => ExchangeRates,
-                           transactionAggregator: TransactionAggregator) {
+class AggregatorAppService(transactionAggregator: TransactionAggregator) {
 
   def aggregateTransactions(input: Input) = {
-    val exchangeRates = readUpExchangeRates(input.exchangeRatesFile)
-    val transactionsIterator1 = readUpTransactions(input.transactionsFile)
-    val money = transactionAggregator.aggregateTransactionsOfPartner(transactionsIterator1, input.partner, input.targetCurrency, exchangeRates)
-    val transactionsIterator2 = readUpTransactions(input.transactionsFile)
-    val groupedTransactions = transactionAggregator.aggregateTransactionsByPartner(transactionsIterator2, input.targetCurrency, exchangeRates)
+    val money = transactionAggregator.aggregateTransactionsOfPartner(
+      input.createTransactionsIterator(),
+      input.partner,
+      input.targetCurrency,
+      input.exchangeRates)
+
+    val groupedTransactions = transactionAggregator.aggregateTransactionsByPartner(
+      input.createTransactionsIterator(),
+      input.targetCurrency,
+      input.exchangeRates)
+
     (money, groupedTransactions)
   }
 }

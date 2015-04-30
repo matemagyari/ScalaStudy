@@ -17,7 +17,7 @@ case class Money(amount: BigDecimal = BigDecimal(0), currency: Currency) {
   def +(addition: Money) = copy(amount + addition.amount, currency)
 
   def convert(targetCurrency: Currency, exchangeRates: ExchangeRates) = targetCurrency match {
-    case currency => this
+    case x if x == currency =>  this
     case _ => copy(amount * exchangeRates(currency, targetCurrency), targetCurrency)
   }
 }

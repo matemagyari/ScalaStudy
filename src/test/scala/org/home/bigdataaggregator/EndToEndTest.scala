@@ -2,34 +2,40 @@ package org.home.bigdataaggregator
 
 import org.home.bigdataaggregator.Monetary.Partner
 import org.home.bigdataaggregator.TestFixture._
-import org.home.bigdataaggregator.infrastructure.{Orchestrator, ExchangeRatesFileReader, TransactionsFileReader}
+import org.home.bigdataaggregator.infrastructure._
+import org.junit.Test
 
-//import org.junit.Assert._
-//import org.junit.Test
+class EndToEndTest {
 
-//class EndToEndTest {
-object EndToEndTest extends App {
-
-  val numOfTransactions = 10//1000 * 1000 * 10
+  val numOfTransactions = 1000 * 1000 * 100
   val transactionsFile = "transactions.csv"
   val exchangeRatesFile = "exchangeRates.csv"
 
-  endToEndTest()
-
-  //@Test
+  @Test
   def endToEndTest() {
 
     var result2: Money = null
     var result1: Map[Partner, Money] = null
 
-    val orchestrator = new Orchestrator(PoormansDIContainer.getAppService(), m => { result1 = m }, m => { result2 = m })
+    val orchestrator = new Orchestrator(PoormansDIContainer.getAppService(),
+      InputAssembler.assemble,
+      m => {
+        result1 = m
+      },
+      m => {
+        result2 = m
+      })
 
-    deleteFiles()
+    //    deleteFiles()
+    //
+    //    val start0 = System.currentTimeMillis()
+    //
+    //    createExchangeRatesFile(exchangeRatesFile)
+    //    createTransactionsFile(transactionsFile, numOfTransactions)
+    //
+    //    Console.println("Generation time: " + (System.currentTimeMillis() - start0))
 
-    createExchangeRatesFile(exchangeRatesFile)
-    createTransactionsFile(transactionsFile, numOfTransactions)
-
-    val input = Input(transactionsFile, exchangeRatesFile, currencies.head, partners.head)
+    val input = CLInput(transactionsFile, exchangeRatesFile, currencies.head, partners.head)
     val start = System.currentTimeMillis()
     orchestrator.aggregate(input)
     //assertNotNull(result1)
@@ -45,12 +51,6 @@ object EndToEndTest extends App {
     delete(transactionsFile)
     delete(exchangeRatesFile)
   }
-
-
-
-
-
-
 
 
 }

@@ -7,8 +7,18 @@ import scala.util.Random
 
 object TestFixture {
 
-  val currencies = List("GBP", "USD", "EUR")
-  val partners = List("Gamesys", "K&F", "Etwas")
+  val currencies = {
+    val letters = 'A' to 'Z'
+    val lazyList = for {c1 <- letters
+                        c2 <- letters
+                        c3 <- letters} yield s"$c1$c2$c3"
+    lazyList.take(100).toList
+  }
+
+  val partners = {
+    val lazyList = for {i <- 1 to 100} yield "P" + i
+    lazyList.take(100).toList
+  }
 
   def createExchangeRatesFile(file: String) {
 
@@ -24,7 +34,7 @@ object TestFixture {
     } finally fw.close()
   }
 
-  def createTransactionsFile(file: String, numOfTransactions:Int) {
+  def createTransactionsFile(file: String, numOfTransactions: Int) {
     val fw = new FileWriter(file, true)
     try {
       (1 to numOfTransactions).foreach { i =>
@@ -44,6 +54,6 @@ object TestFixture {
     n.setScale(scale, RoundingMode.HALF_DOWN)
   }
 
-  def delete(file:String) = new File(file).delete()
+  def delete(file: String) = new File(file).delete()
 
 }

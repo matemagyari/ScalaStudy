@@ -1,7 +1,7 @@
 package org.home.bigdataaggregator.infrastructure
 
-import org.home.bigdataaggregator.Monetary.{Currency, ExchangeRates}
-import org.home.bigdataaggregator.{Transaction, Money}
+import org.home.bigdataaggregator.Monetary._
+import org.home.bigdataaggregator.{Input, Transaction, Money}
 
 import scala.io.Source
 
@@ -24,17 +24,28 @@ object TransactionsFileReader {
 
 object ExchangeRatesFileReader {
 
-  type ExchangeRate = (Currency, Currency, BigDecimal)
+  type ExchangeRate = ((Currency, Currency), BigDecimal)
 
   def lineToExchangeRate(line: String) = {
     val splitLine = CSVUtil.splitCSLine(line)
-    (splitLine(0), splitLine(1), BigDecimal(splitLine(2)))
+    ((splitLine(0), splitLine(1)), BigDecimal(splitLine(2)))
   }
 
-  def addToRates(rates: ExchangeRates, rate: ExchangeRate): ExchangeRates = rates + ((rate._1, rate._2) -> rate._3)
+  def addToRates(rates: ExchangeRates, rate: ExchangeRate) = rates + (rate._1 -> rate._2)
 
   def fileUploader(file: String) = Source.fromFile(file).getLines()
                                       .map(lineToExchangeRate)
                                       .foldLeft(Map.empty[(Currency, Currency), BigDecimal])(addToRates)
 
 }
+
+case class CLInput(transactionsFile: String, exchangeRatesFile: String, targetCurrency: Currency, partner: Partner)
+
+object InputAssembler {
+  def assemble(clInput: CLInput) = {
+    val exchangeRates = ExchangeRatesFileReader.fileUploader(clInput.exchangeRatesFile)
+    val createTransactionsIterator:Unit => Iterator[Transaction] = Unit => TransactionsFileReader.getTransactionsStream(clInput.transactionsFile)
+    Input(createTransactionsIterator, exchangeRates, clInput.targetCurrency, clInput.partner)
+  }
+}
+
