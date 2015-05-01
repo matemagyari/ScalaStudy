@@ -8,8 +8,8 @@ import org.junit.Test
 class EndToEndTest {
 
   val numOfTransactions = 1000 * 1000 * 100
-  val transactionsFile = "transactions.csv"
-  val exchangeRatesFile = "exchangeRates.csv"
+  val transactionsFile = "/Users/mate.magyari/Downloads/transactions/transactions.csv"
+  val exchangeRatesFile = "/Users/mate.magyari/Downloads/exchangeRates.csv"
 
   @Test
   def endToEndTest() {
@@ -35,7 +35,7 @@ class EndToEndTest {
     //
     //    Console.println("Generation time: " + (System.currentTimeMillis() - start0))
 
-    val input = CLInput(transactionsFile, exchangeRatesFile, currencies.head, partners.head)
+    val input = CLInput(transactionsFile, exchangeRatesFile, "GBP", "MRN8w")
     val start = System.currentTimeMillis()
     orchestrator.aggregate(input)
     //assertNotNull(result1)

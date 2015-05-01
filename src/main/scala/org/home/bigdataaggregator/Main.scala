@@ -8,7 +8,7 @@ object Main extends App {
 
   val orchestrator = PoormansDIContainer.getOrcherstrator()
 
-  val input = CLInput("", "", "USD", "")
+  val input = CLInput("/Users/mate.magyari/Downloads/transactions/transactions.csv", "", "GBP", "")
 
   orchestrator.aggregate(input)
 }
