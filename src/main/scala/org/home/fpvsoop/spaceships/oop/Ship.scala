@@ -27,38 +27,28 @@ trait Ship {
   def move(): Unit
 }
 
-class DefaultShip(
-    override val id: Int,
-    override val team: Team,
-    initialArmor: Int,
-    initialHealthPoint: Int,
-    initialCoordinates: Coordinates,
-    world: World) extends Ship {
+//class DefaultShip(
+//    override val id: Int,
+//    override val team: Team,
+//    initialArmor: Int,
+//    initialHealthPoint: Int,
+//    initialCoordinates: Coordinates,
+//    world: World) extends Ship {
+//
+//  private var armor: Int = initialArmor
+//  private var healthPoint: Int = initialHealthPoint
+//  //override var coordinates: Coordinates = initialCoordinates
+//
+//  override def hit(damage: Int): Unit = {
+//    val effectiveHit = damage - armor
+//    if (effectiveHit > 0) {
+//      healthPoint -= effectiveHit
+//    }
+//  }
+//
+//  override def move(): Unit = {
+//    //todo
+//  }
+//}
 
-  private var armor: Int = initialArmor
-  private var healthPoint: Int = initialHealthPoint
-  override var coordinates: Coordinates = initialCoordinates
 
-  override def hit(damage: Int): Unit = {
-    val effectiveHit = damage - armor
-    if (effectiveHit > 0) {
-      healthPoint -= effectiveHit
-    }
-  }
-
-  override def move(): Unit = {
-    //todo
-  }
-}
-
-object Game {
-
-  val ships: Set[Ship] = (1 to 5).toSet.map { id ⇒
-      val team = if (id % 2 == 0) Team.Blue else Team.Red
-    new DefaultShip(id, team, 5, 10, Coordinates(id * 2, id * 3))
-  }
-
-  (1 to 100).foreach {
-    ships.foreach { ship ⇒ }
-  }
-}
